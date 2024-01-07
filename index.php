@@ -20,13 +20,13 @@
         display: grid;
         grid-template-columns: 0.33fr 1fr 0.2fr 1fr 0.2fr 1fr;
         grid-template-rows: 1fr;
-        grid-column-gap: 0px;
-        grid-row-gap: 0px;
+        grid-column-gap: 0;
+        grid-row-gap: 0;
         justify-items: center;
         align-items: center;
         height: 90vh;
         flex-direction: row;
-        color: white;
+        color: dimgrey;
         font-size: 40px;
         font-family: 'Orbitron', sans-serif;
     }
@@ -61,8 +61,8 @@
         display: grid;
         grid-template-columns: 0.25fr 1fr 0.25fr;
         grid-template-rows: 0.25fr 1fr 0.25fr 1fr 0.25fr;
-        grid-column-gap: 0px;
-        grid-row-gap: 0px;
+        grid-column-gap: 0;
+        grid-row-gap: 0;
         justify-items: center;
         align-items: center;
         margin: auto;
@@ -240,16 +240,27 @@
             }, 1000);
         }
 
+        function correctTime(i){
+            if (i < 10) {
+                i = "0" + i;
+            }
+        //     add zero in front of numbers < 10
+            return i;
+        }
+
         function updateTime(){
             let d = new Date();
 
             let seconds = d.getSeconds()
+            seconds = correctTime(seconds);
             let firstSecond = seconds.toString().charAt(0)
             let secondSecond = seconds.toString().charAt(1)
             let minutes = d.getMinutes()
+            minutes = correctTime(minutes);
             let firstMinute = minutes.toString().charAt(0)
             let secondMinute = minutes.toString().charAt(1)
             let hours = d.getHours()
+            hours = correctTime(hours);
             let firstHour = hours.toString().charAt(0)
             let secondHour = hours.toString().charAt(1)
             let day = d.getDay()
@@ -261,7 +272,7 @@
             var firstHourDiv = document.getElementById('FirstHour');
             var secondHourDiv = document.getElementById('SecondHour');
 
-            baseClass = 'segmented-display no-';
+            var baseClass = 'segmented-display no-';
             firstSecondDiv.className = baseClass + firstSecond;
             secondSecondDiv.className = baseClass + secondSecond;
             firstMinuteDiv.className = baseClass + firstMinute;
