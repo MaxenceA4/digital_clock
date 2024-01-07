@@ -18,7 +18,7 @@
 
     .clock {
         display: grid;
-        grid-template-columns: 0.33fr repeat(5, 1fr);
+        grid-template-columns: 0.33fr 1fr 0.2fr 1fr 0.2fr 1fr;
         grid-template-rows: 1fr;
         grid-column-gap: 0px;
         grid-row-gap: 0px;
@@ -47,7 +47,97 @@
     }
 
     .day {
-        padding-left: 40px;
+        padding: 60px;
+    }
+
+    .separator1, .separator2 {
+        font-size: 60px;
+        width: 40px;
+    }
+
+
+
+    .segmented-display {
+        display: grid;
+        grid-template-columns: 0.25fr 1fr 0.25fr;
+        grid-template-rows: 0.25fr 1fr 0.25fr 1fr 0.25fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        justify-items: center;
+        align-items: center;
+        margin: auto;
+    }
+
+    .div1 { grid-area: 2 / 1 / 3 / 2; }
+    .div2 { grid-area: 1 / 2 / 2 / 3; }
+    .div3 { grid-area: 2 / 3 / 3 / 4; }
+    .div4 { grid-area: 3 / 2 / 4 / 3; }
+    .div5 { grid-area: 4 / 1 / 5 / 2; }
+    .div6 { grid-area: 5 / 2 / 6 / 3; }
+    .div7 { grid-area: 4 / 3 / 5 / 4; }
+
+    .div1, .div3, .div5, .div7, .div2, .div4, .div6 {
+        border-radius: 18%;
+        background-color: dimgrey;
+    }
+
+    .div2, .div4, .div6 {
+        height: 30px;
+        width: 90px
+    }
+
+    .div1, .div3, .div5, .div7 {
+        height: 90px;
+        width: 30px
+    }
+
+    .no-1 {
+        .div1, .div5 , .div2 , .div4 , .div6 {
+            opacity: 0.1;
+        }
+    }
+
+    .no-2 {
+        .div1,  .div7 {
+            opacity: 0.1;
+        }
+    }
+
+    .no-3 {
+        .div1, .div5 {
+            opacity: 0.1;
+        }
+    }
+    .no-4 {
+        .div2, .div6, .div5 {
+            opacity: 0.1;
+        }
+    }
+    .no-5 {
+        .div3, .div5{
+            opacity: 0.1;
+        }
+    }
+    .no-6 {
+        .div3 {
+            opacity: 0.1;
+        }
+    }
+    .no-7 {
+        .div1, .div5, .div4, .div6 {
+            opacity: 0.1;
+        }
+    }
+
+    .no-9 {
+        .div5 {
+            opacity: 0.1;
+        }
+    }
+    .no-0 {
+    .div4 {
+            opacity: 0.1;
+        }
     }
 
 </style>
@@ -62,15 +152,78 @@
         <p id="Saturday">Sat</p>
         <p id="Sunday">Sun</p>
     </div>
-    <div class="hours"></div>
-    <div class="separator1">
-        <div class="number" id="firstNumber">:</div>
+
+
+    <div class="hours">
+        <div class="segmented-display no-7" id="FirstHour">
+            <div class="div1"> </div>
+            <div class="div2"> </div>
+            <div class="div3"> </div>
+            <div class="div4"> </div>
+            <div class="div5"> </div>
+            <div class="div6"> </div>
+            <div class="div7"> </div>
+        </div>
+        <div class="segmented-display no-8" id="SecondHour">
+            <div class="div1"> </div>
+            <div class="div2"> </div>
+            <div class="div3"> </div>
+            <div class="div4"> </div>
+            <div class="div5"> </div>
+            <div class="div6"> </div>
+            <div class="div7"> </div>
+        </div>
     </div>
-    <div class="minutes"></div>
+
+    <div class="separator1">:
+
+    </div>
+    <div class="minutes">
+        <div class="segmented-display no-9" id="FirstMinute">
+            <div class="div1"> </div>
+            <div class="div2"> </div>
+            <div class="div3"> </div>
+            <div class="div4"> </div>
+            <div class="div5"> </div>
+            <div class="div6"> </div>
+            <div class="div7"> </div>
+        </div>
+        <div class="segmented-display no-0" id="SecondMinute">
+            <div class="div1"> </div>
+            <div class="div2"> </div>
+            <div class="div3"> </div>
+            <div class="div4"> </div>
+            <div class="div5"> </div>
+            <div class="div6"> </div>
+            <div class="div7"> </div>
+        </div>
+    </div>
+
     <div class="separator2">
-        <div class="number" id="firstNumber">:</div>
+        :
     </div>
-    <div class="seconds"></div>
+
+
+    <div class="seconds">
+        <div class="segmented-display no-5" id="FirstSecond">
+            <div class="div1"> </div>
+            <div class="div2"> </div>
+            <div class="div3"> </div>
+            <div class="div4"> </div>
+            <div class="div5"> </div>
+            <div class="div6"> </div>
+            <div class="div7"> </div>
+        </div>
+        <div class="segmented-display no-6" id="SecondSecond">
+            <div class="div1"> </div>
+            <div class="div2"> </div>
+            <div class="div3"> </div>
+            <div class="div4"> </div>
+            <div class="div5"> </div>
+            <div class="div6"> </div>
+            <div class="div7"> </div>
+        </div>
+    </div>
 </div>
 
 
@@ -78,6 +231,14 @@
 <script>
     <!--    When the DOM is charged-->
     document.addEventListener('DOMContentLoaded', function () {
+        function blinkingSeparators() {
+            let separator1 = document.getElementsByClassName('separator1');
+            let separator2 = document.getElementsByClassName('separator2');
+            setInterval(function () {
+                separator1[0].style.opacity = separator1[0].style.opacity === '0' ? '1' : '0';
+                separator2[0].style.opacity = separator2[0].style.opacity === '0' ? '1' : '0';
+            }, 1000);
+        }
 
         function updateTime(){
             let d = new Date();
@@ -93,13 +254,25 @@
             let secondHour = hours.toString().charAt(1)
             let day = d.getDay()
 
-            var secondsdiv = document.getElementsByClassName('seconds');
-            var minutesdiv = document.getElementsByClassName('minutes');
-            var hoursdiv = document.getElementsByClassName('hours');
+            var firstSecondDiv = document.getElementById('FirstSecond');
+            var secondSecondDiv = document.getElementById('SecondSecond');
+            var firstMinuteDiv = document.getElementById('FirstMinute');
+            var secondMinuteDiv = document.getElementById('SecondMinute');
+            var firstHourDiv = document.getElementById('FirstHour');
+            var secondHourDiv = document.getElementById('SecondHour');
 
-            secondsdiv[0].innerHTML = '<div class="number" id="firstNumber">' + firstSecond + '</div>' + '<div class="number" id="secondNumber">' + secondSecond + '</div>';
-            minutesdiv[0].innerHTML = '<div class="number" id="firstNumber">' + firstMinute + '</div>' + '<div class="number" id="secondNumber">' + secondMinute + '</div>';
-            hoursdiv[0].innerHTML = '<div class="number" id="firstNumber">' + firstHour + '</div>' + '<div class="number" id="secondNumber">' + secondHour + '</div>';
+            baseClass = 'segmented-display no-';
+            firstSecondDiv.className = baseClass + firstSecond;
+            secondSecondDiv.className = baseClass + secondSecond;
+            firstMinuteDiv.className = baseClass + firstMinute;
+            secondMinuteDiv.className = baseClass + secondMinute;
+            firstHourDiv.className = baseClass + firstHour;
+            secondHourDiv.className = baseClass + secondHour;
+
+
+
+
+
 
 
             let dayArray = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -108,8 +281,9 @@
             dayDiv.style.color = 'red';
         }
 
-        setInterval(updateTime, 100);
+        setInterval(updateTime, 1000);
         updateTime();
+        blinkingSeparators();
 
 
 
